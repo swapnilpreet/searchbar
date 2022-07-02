@@ -1,0 +1,5 @@
+1 create a utlis{countries.js}and pest jsn data therir
+2 create a comp.{sarchbar.jsx} write a code here
+3 crate a states in {app.js} namely query with " ",loading with (false),
+suggestion with ([]) why suggestion initail take arry bcs our json file takes [{}] thats why.
+import search bar in app.js

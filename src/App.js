@@ -1,25 +1,42 @@
-import logo from './logo.svg';
 import './App.css';
+import { useEffect, useState } from "react";
+import { SearchBar } from "./Component/SearchBar";
+// import "./styles.css";
+import countries from "./utils/countries";
 
-function App() {
+export default function App() {
+  const [query, setQuery] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [suggestions, setSuggestions] = useState([]);
+
+  useEffect(() => {
+    if (query === "") {
+      setSuggestions([]);
+    } else {
+      let newListOfSuggestions = countries
+        .filter((item) =>
+          item.country.toLowerCase().indexOf(query) !== -1 ? true : false
+        )
+        .map((item) => item.country);
+      setSuggestions(newListOfSuggestions);
+    }
+    setTimeout(() => setLoading(false), 1000);
+  }, [query]);
+
   return (
+    // <div className="bg">
+
+   
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Search Bar</h1>
+      {/* <div>Query is: {query}</div> */}
+      <SearchBar
+        loading={loading}
+        setLoading={setLoading}
+        suggestions={suggestions}
+        onChange={(val) => setQuery(val)}
+      />
     </div>
+    // </div>
   );
 }
-
-export default App;
